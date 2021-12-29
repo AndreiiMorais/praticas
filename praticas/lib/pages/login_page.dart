@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:praticas/components/login/custom_login_button_component.dart';
 import 'package:praticas/controllers/login_controller.dart';
+import 'package:praticas/widgets/custom_textfield_widget.dart';
 
 class LoginPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
@@ -23,16 +24,15 @@ class LoginPage extends StatelessWidget {
             children: [
               Icon(Icons.people,
                   size: MediaQuery.of(context).size.height * 0.4),
-              TextField(
-                decoration: InputDecoration(hintText: 'Login'),
-                textCapitalization: TextCapitalization.words,
+              CustomTextFieldWidget(
+                hintText: 'Login',
                 onChanged: _controller.setLogin,
               ),
               SizedBox(height: 20),
-              TextField(
-                decoration: InputDecoration(hintText: 'Password'),
-                obscureText: true,
+              CustomTextFieldWidget(
+                hintText: 'Senha',
                 onChanged: _controller.setPass,
+                obscureText: true,
               ),
               SizedBox(height: 10), //tambem é possivel usar o Spacer
               CustomLoginButtonComponent(
