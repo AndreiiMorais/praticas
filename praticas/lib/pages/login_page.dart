@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:praticas/controllers/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   LoginController _controller = LoginController();
 
   LoginPage({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldkey,
       body: Container(
         padding: const EdgeInsets.all(28),
         child: SingleChildScrollView(
@@ -32,9 +34,31 @@ class LoginPage extends StatelessWidget {
                 onChanged: _controller.setPass,
               ),
               SizedBox(height: 10), //tambem é possivel usar o Spacer
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Login'),
+              ValueListenableBuilder<bool>(
+                valueListenable: _controller.isLoading,
+                builder: (_, isLoading, __) => isLoading
+                    ? CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: () {
+                          _controller.auth().then(
+                            (returned) {
+                              if (returned) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/home');
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        const Text('Login ou Senha Inválidos!'),
+                                    duration: const Duration(seconds: 2),
+                                  ),
+                                );
+                              }
+                            },
+                          );
+                        },
+                        child: Text('Login'),
+                      ),
               )
             ],
           ),
