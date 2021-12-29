@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:praticas/components/login/custom_login_button_component.dart';
 import 'package:praticas/controllers/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -34,32 +35,9 @@ class LoginPage extends StatelessWidget {
                 onChanged: _controller.setPass,
               ),
               SizedBox(height: 10), //tambem é possivel usar o Spacer
-              ValueListenableBuilder<bool>(
-                valueListenable: _controller.isLoading,
-                builder: (_, isLoading, __) => isLoading
-                    ? CircularProgressIndicator()
-                    : ElevatedButton(
-                        onPressed: () {
-                          _controller.auth().then(
-                            (returned) {
-                              if (returned) {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/home');
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content:
-                                        const Text('Login ou Senha Inválidos!'),
-                                    duration: const Duration(seconds: 2),
-                                  ),
-                                );
-                              }
-                            },
-                          );
-                        },
-                        child: Text('Login'),
-                      ),
-              )
+              CustomLoginButtonComponent(
+                loginController: _controller,
+              ),
             ],
           ),
         ),
