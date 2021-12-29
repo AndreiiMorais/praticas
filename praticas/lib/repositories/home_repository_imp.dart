@@ -6,10 +6,12 @@ class HomeRepositoryImp implements HomeReposiroty {
   @override
   Future<List<PostModel>> getList() async {
     try {
-      var response = await Dio().get('http://www.google.com');
-      print(response);
+      var response =
+          await Dio().get('https://jsonplaceholder.typicode.com/posts');
+      return (response.data as List).map((e) => PostModel.fromJson(e)).toList();
     } catch (e) {
       print(e);
     }
+    return [];
   }
 }

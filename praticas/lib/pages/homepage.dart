@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:praticas/controllers/home_controller.dart';
 import 'package:praticas/models/post_model.dart';
-import 'package:praticas/repositories/home_repository_mock.dart';
+import 'package:praticas/repositories/home_repository_imp.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final HomeController _controller = HomeController(HomeRepositoryMock());
+  final HomeController _controller = HomeController(HomeRepositoryImp());
 
   @override
   void initState() {
