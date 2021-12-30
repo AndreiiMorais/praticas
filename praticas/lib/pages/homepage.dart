@@ -22,13 +22,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
       body: ValueListenableBuilder<List<PostModel>>(
           valueListenable: _controller.posts,
           builder: (_, list, __) {
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (context, index) => const Divider(
+                thickness: 3,
+              ),
               itemCount: list.length,
               itemBuilder: (_, idx) => ListTile(
+                leading: Text(list[idx].id.toString()),
                 title: Text(list[idx].title),
+                trailing: const Icon(Icons.arrow_forward),
+                onTap: () => Navigator.of(context).pushNamed('/details', arguments: list[idx]),
               ),
             );
           }),

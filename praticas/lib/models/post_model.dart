@@ -10,4 +10,7 @@ class PostModel {
     //assim se cria um objeto do tipo PostModel vindo de um mapa
     return PostModel(json['userId'], json['id'], json['title'], json['body']);
   }
+
+  @override
+  String toString() => 'id: $id';
 }
