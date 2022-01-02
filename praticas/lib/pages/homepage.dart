@@ -24,6 +24,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              
+            }, icon: const Icon(Icons.logout),
+          )
+        ],
       ),
       body: ValueListenableBuilder<List<PostModel>>(
           valueListenable: _controller.posts,
@@ -37,7 +44,8 @@ class _HomePageState extends State<HomePage> {
                 leading: Text(list[idx].id.toString()),
                 title: Text(list[idx].title),
                 trailing: const Icon(Icons.arrow_forward),
-                onTap: () => Navigator.of(context).pushNamed('/details', arguments: list[idx]),
+                onTap: () => Navigator.of(context)
+                    .pushNamed('/details', arguments: list[idx]),
               ),
             );
           }),
