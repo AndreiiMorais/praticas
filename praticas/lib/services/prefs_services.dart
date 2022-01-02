@@ -24,4 +24,9 @@ class PrefsServices {
 
     return false;
   }
+
+  static logout() async {
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_key);
+  }
 }
